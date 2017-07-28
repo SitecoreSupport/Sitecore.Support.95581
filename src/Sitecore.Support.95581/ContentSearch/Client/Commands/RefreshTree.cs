@@ -8,7 +8,7 @@
 // --------------------------------------------------------------------------------------------------------------------
 
 using System.Collections.Specialized;
-
+using System.Runtime.Serialization;
 using Sitecore.Data;
 using Sitecore.Web.UI.Sheer;
 
@@ -38,11 +38,13 @@ namespace Sitecore.Support.ContentSearch.Client.Commands
     /// <summary>
     /// The translate.
     /// </summary>
+    [NonSerialized]
     private ITranslate translate;
 
     /// <summary>
     /// The event.
     /// </summary>
+    [NonSerialized]
     private IEvent @event;
 
     #region Construction
@@ -98,6 +100,7 @@ namespace Sitecore.Support.ContentSearch.Client.Commands
     {
       get
       {
+        // Such implementation is needed since after deserialization, the translate field is null 
         if (this.translate == null)
         {
           Interlocked.CompareExchange(
