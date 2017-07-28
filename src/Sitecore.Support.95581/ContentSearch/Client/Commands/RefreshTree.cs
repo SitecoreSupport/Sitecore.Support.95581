@@ -189,6 +189,7 @@ namespace Sitecore.Support.ContentSearch.Client.Commands
 
       this.Event.Subscribe("indexing:updateditem", this.ShowProgress);
 
+      Log.Audit($"Refresh indexes for item: {AuditFormatter.FormatItem(item)}", this);
       var jobs = GetRefreshTreeJobs((SitecoreIndexableItem)item, new[] { IndexGroup.Experience }).ToList(); // Sitecore.Support.95581
 
       while (jobs.Any(j => !j.IsDone))
